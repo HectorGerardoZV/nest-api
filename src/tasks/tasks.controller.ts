@@ -15,17 +15,20 @@ import { Task } from './tasks.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/decorators/get-user.decorator';
 import { User } from 'src/auth/user.entity';
+import { Logger } from '@nestjs/common';
 
 @Controller('tasks')
 @UseGuards(AuthGuard())
 export class TasksController {
+    private logger = new Logger();
     constructor(private tasksService: TasksService) { }
-
+    
     @Get()
     async getTasks(
         @Query() filterDTO: GetTasksFilterDTO,
         @GetUser() user: User
     ): Promise<Task[]> {
+        this.logger.log('GET/tasks');
         return await this.tasksService.getAllTasks(filterDTO, user);
     }
 

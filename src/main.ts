@@ -12,9 +12,8 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(new TransformInterceptor());
   const port: string = process.env.SERVER_PORT;
-  const host: string = process.env.SERVER_HOST;
-  await app.listen(port, host, () => {
-    logger.log(`Server running in ${host}:${port}`);
+  await app.listen(port, () => {
+    logger.log(`Server running in port ${port}`);
   });
 }
 bootstrap();

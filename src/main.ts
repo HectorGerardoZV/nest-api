@@ -11,8 +11,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(new TransformInterceptor());
-  const port: string = '3000';
-  const host: string = 'localhost';
+  const port: string = process.env.SERVER_PORT;
+  const host: string = process.env.SERVER_HOST;
   await app.listen(port, host, () => {
     logger.log(`Server running in ${host}:${port}`);
   });
